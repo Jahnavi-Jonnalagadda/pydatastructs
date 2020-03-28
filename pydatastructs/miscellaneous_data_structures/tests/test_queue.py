@@ -4,20 +4,23 @@ from pydatastructs.utils.raises_util import raises
 def test_Queue():
 
     q1 = Queue(implementation='array', items=[0])
-    q1.append(1)
-    q1.append(2)
+    q1.appendleft(1)
+    q1.appendleft(2)
     q1.append(3)
-    assert str(q1) == '[0, 1, 2, 3]'
-    assert len(q1) == 4
+    q1.append(4)
+    assert str(q1) == '[0, 1, 2, 3, 4]'
+    assert len(q1) == 5
     assert q1.popleft() == 0
     assert q1.popleft() == 1
-    assert len(q1) == 2
-    assert q1.popleft() == 2
-    assert q1.popleft() == 3
+    assert len(q1) == 3
+    assert q1.popright() == 4
+    assert q1.popright() == 3
+    assert q1.popright() == 2
     assert len(q1) == 0
 
     q1 = Queue()
     raises(IndexError, lambda: q1.popleft())
+    raises(IndexError, lambda: q1.popright())
 
     q1 = Queue(implementation='linked_list')
     q1.append(1)
