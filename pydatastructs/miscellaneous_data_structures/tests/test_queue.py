@@ -50,3 +50,5 @@ def test_Queue():
         q1.popleft()
 
     assert rear.data == q1.popleft().data
+    
+    
